@@ -7,10 +7,10 @@ import palmerpenguins
 
 df = palmerpenguins.load_penguins()
 
-ui.page_opts(title="Penguins dashboard", fillable=True)
+ui.page_opts(title="Penguins Dashboard", fillable=True)
 
 
-with ui.sidebar(title="Filter controls"):
+with ui.sidebar(title="Interactive Options"):
     ui.input_slider("mass", "Mass", 2000, 6000, 6000)
     ui.input_checkbox_group(
         "species",
@@ -19,20 +19,20 @@ with ui.sidebar(title="Filter controls"):
         selected=["Adelie", "Gentoo", "Chinstrap"],
     )
     ui.hr()
-    ui.h6("Links")
+    ui.h6("Project Links")
     ui.a(
-        "GitHub Source",
-        href="https://github.com/denisecase/cintel-07-tdash",
+        "GitHub Repo",
+        href="https://github.com/bncodes19/cintel-07-tdash",
         target="_blank",
     )
     ui.a(
         "GitHub App",
-        href="https://denisecase.github.io/cintel-07-tdash/",
+        href="https://bncodes19.github.io/cintel-07-tdash/",
         target="_blank",
     )
     ui.a(
         "GitHub Issues",
-        href="https://github.com/denisecase/cintel-07-tdash/issues",
+        href="https://github.com/bncodes19/cintel-07-tdash/issues",
         target="_blank",
     )
     ui.a("PyShiny", href="https://shiny.posit.co/py/", target="_blank")
@@ -43,7 +43,7 @@ with ui.sidebar(title="Filter controls"):
     )
     ui.a(
         "See also",
-        href="https://github.com/denisecase/pyshiny-penguins-dashboard-express",
+        href="https://github.com/bncodes19/pyshiny-penguins-dashboard-express",
         target="_blank",
     )
 
@@ -57,14 +57,14 @@ with ui.layout_column_wrap(fill=False):
             return filtered_df().shape[0]
 
     with ui.value_box(showcase=icon_svg("ruler-horizontal")):
-        "Average bill length"
+        "Avg. bill length"
 
         @render.text
         def bill_length():
             return f"{filtered_df()['bill_length_mm'].mean():.1f} mm"
 
     with ui.value_box(showcase=icon_svg("ruler-vertical")):
-        "Average bill depth"
+        "Avg. bill depth"
 
         @render.text
         def bill_depth():
@@ -97,10 +97,6 @@ with ui.layout_columns():
                 "body_mass_g",
             ]
             return render.DataGrid(filtered_df()[cols], filters=True)
-
-
-#ui.include_css(app_dir / "styles.css")
-
 
 @reactive.calc
 def filtered_df():
